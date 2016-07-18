@@ -25,9 +25,9 @@ function ActivePlaceholder(element, base = 'Always shown: ', placeholders = ['Ch
 						state = 'build';
 					}
 				} else {
-					currentWordIndex = (currentWordIndex + 1) % placeholders.length;
-					currentWord = placeholders[currentWordIndex];
-					element.placeholder = base;
+					currentWordIndex = (currentWordIndex + 1) % activePlaceholder.placeholders.length;
+					currentWord = activePlaceholder.placeholders[currentWordIndex];
+					element.placeholder = activePlaceholder.base;
 					countdown = activePlaceholder.fBase;
 				}
 				break;
