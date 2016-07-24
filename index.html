@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>active-placeholder.js</title>
+		<link rel="stylesheet" href="https://dl.dropboxusercontent.com/u/5586777/reset.min.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Droid+Sans">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.js"></script>
+		<script src="./active-placeholder.js"></script>
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+			body {
+				font-family: 'Droid Sans', serif;
+				font-size: 16px;
+				background: #e0b694;
+				line-height: 1.2em;
+			}
+			@media (max-width: 900px) {
+				body {
+					font-size: 12px;
+				}
+			}
+			.container-pretty {
+				margin: 0 auto;
+				padding: 3% 5%;
+				max-width: 760px;
+			}
+			.container-not-pretty {
+			}
+			pre, code {
+				margin-top: 5px;
+				font-family: 'Inconsolata', serif;
+				background: #ddd;
+				overflow-x: auto;
+			}
+			pre.language-html {
+				margin-top: 10px;
+				
+				/* prism.js has very generous padding */
+				padding-top: 0.5em;
+				padding-bottom: 0.5em;
+			}
+			h1, p.subtitle {
+				text-align: center;
+			}
+			h1 {
+				font-size: 2.4em;
+				line-height: 1.0em;
+			}
+			p.subtitle {
+				font-size: 1.1em;
+			}
+			h2 {
+				font-size: 1.3em;
+				line-height: 1.3em;
+				margin-top: 10px;
+			}
+			p {
+				font-size: 0.9em;
+				margin-top: 5px;
+			}
+			div.demo {
+				margin: 5px auto 15px;
+				background: #f1dfd0;
+				padding: 5px;
+			}
+			div.demo input {
+				font-size: 1.3em;
+				display: block;
+				width: 100%;
+				padding-left: 4px;
+				border: none;
+		        border-radius: 3px;
+			}
+			div.demo a, div.demo a:visited {
+				display: inline-block;
+				margin-top: 5px;
+				padding: 4px;
+				border-radius: 3px;
+				color: #ddd;
+				background: green;
+				text-decoration: none;
+			}
+			div.demo a:hover, div.demo a:active {
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container-pretty">
+			<div class="container-not-pretty">
+				<h1>Active Placeholder</h1>
+				<p class="subtitle">A Javascript library (object?) to animate placeholder text in input fields.</p>
+
+				<h2>Basic use</h2>
+				<p>Create an ActivePlaceholder tied to the input it will control. Once started, the <code>activePlaceholder.base</code> string will always be visible, and the ActivePlaceholder will cycle through the strings in the <code>activePlaceholder.placeholders</code> array.</p>
+
+<pre><code class="language-html">&lt;input type="text" id="input1" placeholder="Placeholder"&gt;
+&lt;a onclick="activePlaceholder1.start();return false;"&gt;Start!&lt;/a&gt;
+&lt;a onclick="activePlaceholder1.stop();return false;"&gt;Stop!&lt;/a&gt;
+&lt;script&gt;
+	var input1 = document.getElementById('input1');
+	var activePlaceholder1 = new ActivePlaceholder(input1);
+	activePlaceholder1.base = 'Pillow: ';
+	activePlaceholder1.placeholders = 
+		['firefly', 'rain', 'disappointment'];
+&lt;/script&gt;</code></pre>
+				<div class="demo">
+					<input type="text" id="input1" placeholder="Placeholder">
+						<a onclick="activePlaceholder1.start();return false;">Start!</a>
+						<a onclick="activePlaceholder1.stop();return false;">Stop!</a>
+						<script>
+							var input1 = document.getElementById('input1');
+							var activePlaceholder1 = new ActivePlaceholder(input1);
+							activePlaceholder1.base = 'Pillow: ';
+							activePlaceholder1.placeholders = ['firefly', 'rain', 'disappointment'];
+						</script>
+					</div>
+				
+				<p><code>activePlaceholder.base</code> and <code>activePlaceholder.placeholders</code> can also be set in the constructor.</p>
+
+<pre><code class="language-html">&lt;input type="text" id="input2" placeholder="Placeholder"&gt;
+&lt;script&gt;
+	var input2 = document.getElementById('input2');
+	var activePlaceholder2 = new ActivePlaceholder(
+		input2, 'Flowers', ['hardstyle', 'wrists']);
+	activePlaceholder2.start();
+&lt;/script&gt;</code></pre>
+				<div class="demo">
+					<input type="text" id="input2" placeholder="Placeholder">
+					<script>
+						var input2 = document.getElementById('input2');
+						var activePlaceholder2 = new ActivePlaceholder(input2, 'Flowers ', ['hardstyle', 'wrists']);
+						activePlaceholder2.start();
+					</script>
+				</div>
+
+				<h2>Controlling timing</h2>
+				<p>Animation is divided into four segments: base, build, full, and remove. Their durations are defined in frames, with the animation running at 24fps unless changed in <code>active-placeholder.js</code>.</p>
+
+<pre><code class="language-html">&lt;input type="text" id="input3" placeholder="Placeholder"&gt;
+&lt;script&gt;
+	var input3 = document.getElementById('input3');
+	var activePlaceholder3 = new ActivePlaceholder(
+		input3, 'Eyelids ', ['Gatorade']);
+	activePlaceholder3.fBase = 24;
+	activePlaceholder3.fBuild = 12;
+	activePlaceholder3.fFull = 48;
+	activePlaceholder3.fRemove = 2;
+	activePlaceholder3.start();
+&lt;/script&gt;</code></pre>
+				<div class="demo">
+					<input type="text" id="input3" placeholder="Placeholder">
+					<script>
+						var input3 = document.getElementById('input3');
+						var activePlaceholder3 = new ActivePlaceholder(input3, 'Eyelids ', ['Gatorade']);
+						activePlaceholder3.fBase = 24;
+						activePlaceholder3.fBuild = 12;
+						activePlaceholder3.fFull = 48;
+						activePlaceholder3.fRemove = 2;
+						activePlaceholder3.start();
+					</script>
+				</div>
+
+				<p>These can be set in the constructor as well.</p>
+
+<pre><code class="language-html">&lt;input type="text" id="input4" placeholder="Placeholder"&gt;
+&lt;script&gt;
+	var input4 = document.getElementById('input4');
+	var activePlaceholder4 = new ActivePlaceholder(
+		input4, 'Chicken ', ['Soccer', 'Turbulence', 'Polar Bears'],
+		1, 48, 24, 12);
+	activePlaceholder4.start();
+&lt;/script&gt;</code></pre>
+				<div class="demo">
+					<input type="text" id="input4" placeholder="Placeholder">
+					<script>
+						var input4 = document.getElementById('input4');
+						var activePlaceholder4 = new ActivePlaceholder(input4, 'Chicken ', ['Soccer', 'Turbulence', 'Polar Bears'], 1, 48, 24, 12);
+						activePlaceholder4.start();
+					</script>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
