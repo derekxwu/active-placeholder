@@ -2,11 +2,11 @@
 <html lang="en">
 	<head>
 		<title>active-placeholder.js</title>
-		<link rel="stylesheet" href="https://dl.dropboxusercontent.com/u/5586777/reset.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Droid+Sans">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.js"></script>
-		<script src="./active-placeholder.js"></script>
+		<script src="./active-placeholder.min.js"></script>
 		<style>
 			* {
 				box-sizing: border-box;
@@ -37,7 +37,7 @@
 			}
 			pre.language-html {
 				margin-top: 10px;
-				
+
 				/* prism.js has very generous padding */
 				padding-top: 0.5em;
 				padding-bottom: 0.5em;
@@ -104,7 +104,7 @@
 	var input1 = document.getElementById('input1');
 	var activePlaceholder1 = new ActivePlaceholder(input1);
 	activePlaceholder1.base = 'Pillow: ';
-	activePlaceholder1.placeholders = 
+	activePlaceholder1.placeholders =
 		['firefly', 'rain', 'disappointment'];
 &lt;/script&gt;</code></pre>
 				<div class="demo">
@@ -118,7 +118,7 @@
 							activePlaceholder1.placeholders = ['firefly', 'rain', 'disappointment'];
 						</script>
 					</div>
-				
+
 				<p><code>activePlaceholder.base</code> and <code>activePlaceholder.placeholders</code> can also be set in the constructor.</p>
 
 <pre><code class="language-html">&lt;input type="text" id="input2" placeholder="Placeholder"&gt;
@@ -170,7 +170,8 @@
 &lt;script&gt;
 	var input4 = document.getElementById('input4');
 	var activePlaceholder4 = new ActivePlaceholder(
-		input4, 'Chicken ', ['Soccer', 'Turbulence', 'Polar Bears'],
+		input4, 'Chicken ',
+		['Soccer', 'Turbulence', 'Polar Bears'],
 		1, 48, 24, 12);
 	activePlaceholder4.start();
 &lt;/script&gt;</code></pre>

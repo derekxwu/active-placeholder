@@ -50,7 +50,7 @@ function ActivePlaceholder() {
 		this.fRemove = arguments[6];
 	}
 
-	/* 
+	/*
 	States:
 		base: Just base string
 		build: Base string + building placeholder string
@@ -71,7 +71,7 @@ function ActivePlaceholder() {
 	var currentWordIndex = 0;
 	var countdown = 0;
 	var animation = null;
-	
+
 	// TODO?? Make this changeable
 	// 	but WHY
 	//		different APs at different framerates?
@@ -102,10 +102,10 @@ function ActivePlaceholder() {
 						state = 'build';
 					}
 				} else {
-					currentWordIndex = (currentWordIndex + 1) % activePlaceholder.placeholders.length;
 					currentWord = activePlaceholder.placeholders[currentWordIndex];
 					element.placeholder = activePlaceholder.base;
 					countdown = activePlaceholder.fBase;
+					currentWordIndex = (currentWordIndex + 1) % activePlaceholder.placeholders.length;
 				}
 				break;
 
